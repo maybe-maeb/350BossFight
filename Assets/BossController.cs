@@ -23,15 +23,17 @@ public class BossController : MonoBehaviour
     private Animator anim;
 
     public GameObject flyingBombardment;
+    public GameObject burrowAttack;
 
     public void Start(){
         anim = GetComponent<Animator>();
-        currentStage = CurrentStage.Stage1;
+        currentStage = CurrentStage.Stage2;
         ChooseAttack();
     }
 
     public void ChooseAttack(){
         if (currentStage == CurrentStage.Stage1) StartCoroutine("FlyingBombardment"); 
+        else if (currentStage == CurrentStage.Stage2) StartCoroutine("BurrowAttack");
     }
 
     public IEnumerator TakeDamage(){
@@ -106,6 +108,20 @@ public class BossController : MonoBehaviour
         anim.SetTrigger("FinishFlyingBombardment");
         flyingBombardment.SetActive(false);
         yield return new WaitForSeconds(5f);
+        BeVulnerable();
+    }
+
+    public IEnumerator BurrowAttack(){
+        //Go underground
+        anim.SetTrigger("GoUnderground");
+        yield return new WaitForSeconds(1f);
+        burrowAttack.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        burrowAttack.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        burrowAttack.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        anim.SetTrigger("ReturnToSurface");
         BeVulnerable();
     }
 }
