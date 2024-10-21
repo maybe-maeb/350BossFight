@@ -9,12 +9,19 @@ A video playthrough of this boss fight can be found at https://youtu.be/kP2yLMSJ
 Made using free assets from the Unity asset store by:
 
 Moonflower Carnivore
+
 Hovl Studio
+
 Dungeon Mason
+
 Unity Technologies
+
 Broken Vector
+
 SineVFX
+
 Free assets by these creators (from the Unity asset store) were used during prototyping but were removed before the final version:
 
 Comeback
+
 Sagital3D
