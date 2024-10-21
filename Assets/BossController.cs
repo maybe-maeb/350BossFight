@@ -27,7 +27,7 @@ public class BossController : MonoBehaviour
 
     public void Start(){
         anim = GetComponent<Animator>();
-        currentStage = CurrentStage.Stage2;
+        currentStage = CurrentStage.Stage1;
         ChooseAttack();
     }
 
@@ -116,11 +116,11 @@ public class BossController : MonoBehaviour
         anim.SetTrigger("GoUnderground");
         yield return new WaitForSeconds(1f);
         burrowAttack.SetActive(true);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
         burrowAttack.SetActive(true);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
         burrowAttack.SetActive(true);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
         anim.SetTrigger("ReturnToSurface");
         BeVulnerable();
     }

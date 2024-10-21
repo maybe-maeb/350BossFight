@@ -7,6 +7,7 @@ public class BurrowingAttack : MonoBehaviour
     public float followDuration;
     public float attackDelay;
 
+    public GameObject fakeBoss;
     public GameObject boss;
 
     public GameObject hitBox;
@@ -33,6 +34,7 @@ public class BurrowingAttack : MonoBehaviour
         transform.position = pos;
         hitBox.SetActive(false);
         startedAttack = false;
+        boss.SetActive(false);
     }
 
     void Update()
@@ -40,12 +42,13 @@ public class BurrowingAttack : MonoBehaviour
         if (lerping){
             if (timeElapsed < flyDuration)
             {
-                boss.transform.position = Vector3.Lerp(bossStartPosition, bossTargetPosition, timeElapsed / flyDuration);
+                fakeBoss.transform.position = Vector3.Lerp(bossStartPosition, bossTargetPosition, timeElapsed / flyDuration);
                 timeElapsed += Time.deltaTime;
             }
             if (timeElapsed > flyDuration) {
-                boss.transform.position = bossTargetPosition;
+                fakeBoss.transform.position = bossTargetPosition;
                 lerping = false;
+                fakeBoss.SetActive(false);
             }
         }
         
@@ -66,16 +69,18 @@ public class BurrowingAttack : MonoBehaviour
     public IEnumerator Attack()
     {
         startedAttack = true;
-        Vector3 bossPos = new Vector3(transform.position.x, -10, transform.position.z);
-        boss.transform.position = bossPos;
-        bossStartPosition = bossPos;
-        bossTargetPosition = new Vector3(bossPos.x, 30, bossPos.z);
         timeElapsed = 0;
         yield return new WaitForSeconds(attackDelay);
+        Vector3 bossPos = new Vector3(transform.position.x, -10, transform.position.z);
+        fakeBoss.transform.position = bossPos;
+        bossStartPosition = bossPos;
+        bossTargetPosition = new Vector3(bossPos.x, 30, bossPos.z);
+        fakeBoss.SetActive(true);
         lerping = true;
         hitBox.SetActive(true);
         particleIndicator.SetActive(false);
         yield return new WaitForSeconds(0.25f);
+        boss.SetActive(true);
         hitBox.SetActive(false);
         this.gameObject.SetActive(false);
     }
