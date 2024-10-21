@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Fire
   - EnemyHitBox
+  - Crystal
+  - PlayerHitBox
   layers:
   - Default
   - TransparentFX
